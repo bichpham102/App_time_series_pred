@@ -88,6 +88,7 @@ def comparison_chart(data, title):
 st.header('Predict next 12 months values')
 # GET DATA  
 uploaded_file = st.file_uploader("Upload your csv with 2 columns: 'ds' for date and 'y' for the predicting values. There should be 1 record per month, the 'ds' value for each month is the Start of the month.")
+
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file, parse_dates=['ds'])
     data['ds'] = pd.to_datetime(data['ds'].apply(lambda x: x.date()) )
@@ -143,6 +144,6 @@ if uploaded_file is not None:
     st.download_button(
         label = 'Download forecast as CSV'
         ,data = csv 
-        ,file_name = 'forecast.csv'
+        ,file_name = 'FC_' + uploaded_file.name + '.csv'
         ,mime = 'text/csv'
     )
